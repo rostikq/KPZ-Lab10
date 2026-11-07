@@ -2,6 +2,7 @@ package io.github.rostikq;
 
 
 import io.github.rostikq.task1.*;
+import io.github.rostikq.task2.*;
 import io.github.rostikq.task3.Waybill;
 import io.github.rostikq.task3.WaybillBuilder;
 
