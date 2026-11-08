@@ -1,0 +1,41 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class DeliveryResult {
+    - type: String
+    - cost: double
+    - days: int
+    + toString(): String
+}
+
+abstract class DeliveryCreator {
+    {abstract} + calculateAndCreateDelivery(address: String, weight: double): DeliveryResult
+    + processDelivery(address: String, weight: double): void
+}
+
+class CourierDeliveryCreator {
+    + calculateAndCreateDelivery(address: String, weight: double): DeliveryResult
+}
+
+class PostamatDeliveryCreator {
+    + calculateAndCreateDelivery(address: String, weight: double): DeliveryResult
+}
+
+class BranchDeliveryCreator {
+    + calculateAndCreateDelivery(address: String, weight: double): DeliveryResult
+}
+
+class FloorDeliveryCreator {
+    + calculateAndCreateDelivery(address: String, weight: double): DeliveryResult
+}
+
+DeliveryCreator <|-- CourierDeliveryCreator : наслідує
+DeliveryCreator <|-- PostamatDeliveryCreator : наслідує
+DeliveryCreator <|-- BranchDeliveryCreator : наслідує
+DeliveryCreator <|-- FloorDeliveryCreator : наслідує
+
+DeliveryCreator ..> DeliveryResult : створює
+
+note top of DeliveryCreator : Загальний процес оформлення\n(Фабричний метод)
+note bottom of FloorDeliveryCreator : Новий спосіб (розширення без\зміни базового процесу)
+@enduml

@@ -1,0 +1,62 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+interface Box {
+    + getDescription(): String
+}
+
+interface Filler {
+    + getDescription(): String
+}
+
+interface Label {
+    + getDescription(): String
+}
+
+interface PackagingFactory {
+    + createBox(): Box
+    + createFiller(): Filler
+    + createLabel(): Label
+}
+
+class StandardPackagingFactory {
+    + createBox(): Box
+    + createFiller(): Filler
+    + createLabel(): Label
+}
+
+class FragilePackagingFactory {
+    + createBox(): Box
+    + createFiller(): Filler
+    + createLabel(): Label
+}
+
+class ColdPackagingFactory {
+    + createBox(): Box
+    + createFiller(): Filler
+    + createLabel(): Label
+}
+
+class OversizedPackagingFactory {
+    + createBox(): Box
+    + createFiller(): Filler
+    + createLabel(): Label
+}
+
+class PackingStation {
+    + packShipment(shipmentName: String, factory: PackagingFactory): void
+}
+
+PackagingFactory <|.. StandardPackagingFactory : реалізує
+PackagingFactory <|.. FragilePackagingFactory : реалізує
+PackagingFactory <|.. ColdPackagingFactory : реалізує
+PackagingFactory <|.. OversizedPackagingFactory : реалізує
+
+PackingStation --> PackagingFactory : використовує
+PackagingFactory ..> Box : створює
+PackagingFactory ..> Filler : створює
+PackagingFactory ..> Label : створює
+
+note top of PackagingFactory : Абстрактна фабрика (Abstract Factory)
+note top of PackingStation : Клієнтський код (не знає конкретних класів)
+@enduml

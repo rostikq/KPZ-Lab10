@@ -1,0 +1,43 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Waybill {
+    - sender: String
+    - recipient: String
+    - recipientPhone: String
+    - weight: double
+    - declaredValue: boolean
+    - cashOnDelivery: boolean
+    - returnDocuments: boolean
+    - packagingService: boolean
+    - insurance: boolean
+    ~ Waybill(builder: WaybillBuilder)
+    + toString(): String
+}
+
+class WaybillBuilder {
+    - sender: String
+    - recipient: String
+    - recipientPhone: String
+    - weight: double
+    - declaredValue: boolean
+    - cashOnDelivery: boolean
+    - returnDocuments: boolean
+    - packagingService: boolean
+    - insurance: boolean
+    + setSender(sender: String): WaybillBuilder
+    + setRecipient(recipient: String, phone: String): WaybillBuilder
+    + setWeight(weight: double): WaybillBuilder
+    + setDeclaredValue(val: boolean): WaybillBuilder
+    + setCashOnDelivery(val: boolean): WaybillBuilder
+    + setReturnDocuments(val: boolean): WaybillBuilder
+    + setPackagingService(val: boolean): WaybillBuilder
+    + setInsurance(val: boolean): WaybillBuilder
+    + build(): Waybill
+    {static} + buildTypicalDocuments(sender: String, recipient: String, phone: String): Waybill
+}
+
+WaybillBuilder ..> Waybill : конструює та валідує
+
+note top of WaybillBuilder : Покроковий будівельник (Builder)\nз перевіркою обов'язкових полів
+@enduml
